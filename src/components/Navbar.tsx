@@ -1,8 +1,10 @@
 import { ShoppingCart, Search, User, Menu, Gamepad2 } from 'lucide-react';
 import { useState } from 'react';
+import { useCart } from '@/contexts/CartContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { totalItems, setIsOpen } = useCart();
 
   const navItems = [
     { name: 'PlayStation', href: '#playstation' },
@@ -45,11 +47,16 @@ const Navbar = () => {
             <button className="p-2 text-muted-foreground hover:text-primary transition-colors">
               <User className="h-5 w-5" />
             </button>
-            <button className="relative p-2 text-muted-foreground hover:text-primary transition-colors">
+            <button 
+              onClick={() => setIsOpen(true)}
+              className="relative p-2 text-muted-foreground hover:text-primary transition-colors"
+            >
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
-                3
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </button>
             <button
               className="md:hidden p-2 text-muted-foreground"

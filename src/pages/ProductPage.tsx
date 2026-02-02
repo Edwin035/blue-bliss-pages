@@ -4,11 +4,25 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { getProductById, getRelatedProducts } from '@/data/products';
+import { useCart } from '@/contexts/CartContext';
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
+  const { addToCart } = useCart();
   const product = getProductById(Number(id));
   const relatedProducts = product ? getRelatedProducts(product, 4) : [];
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart({
+        id: product.id,
+        title: product.title,
+        image: product.image,
+        platform: product.platform,
+        price: product.discountPrice
+      });
+    }
+  };
 
   if (!product) {
     return (
@@ -118,7 +132,10 @@ const ProductPage = () => {
               </div>
 
               {/* Buy Button */}
-              <button className="w-full btn-gaming text-center py-3 text-lg mb-6">
+              <button 
+                onClick={handleAddToCart}
+                className="w-full btn-gaming text-center py-3 text-lg mb-6"
+              >
                 COMPRAR
               </button>
 
