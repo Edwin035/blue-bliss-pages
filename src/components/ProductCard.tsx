@@ -40,7 +40,7 @@ const ProductCard = ({ image, title, platform, originalPrice, discountPrice, dis
               ${originalPrice.toLocaleString()} USD
             </span>
           )}
-          <span className="text-lg font-bold text-primary">
+          <span className="text-lg font-bold text-neon-green">
             ${discountPrice.toLocaleString()} USD
           </span>
         </div>
