@@ -37,11 +37,11 @@ const ProductCard = ({ image, title, platform, originalPrice, discountPrice, dis
         <div className="flex items-center gap-2 mt-3">
           {discount && (
             <span className="text-xs text-muted-foreground line-through">
-              ${originalPrice.toLocaleString()} MXN
+              ${originalPrice.toLocaleString()} USD
             </span>
           )}
           <span className="text-lg font-bold text-primary">
-            ${discountPrice.toLocaleString()} MXN
+            ${discountPrice.toLocaleString()} USD
           </span>
         </div>
 
