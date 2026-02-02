@@ -1,103 +1,125 @@
-import { Gamepad2, Mail, Phone, MapPin } from 'lucide-react';
+import { Gamepad2, Monitor, Gift, CreditCard, Tv, MessageCircle, HelpCircle, Clock, Facebook, Instagram } from 'lucide-react';
 
 const Footer = () => {
-  const footerLinks = {
-    productos: ['PlayStation', 'Xbox', 'Steam', 'Nintendo', 'Mobile Games'],
-    ayuda: ['FAQ', 'Contacto', 'Envíos', 'Devoluciones', 'Términos'],
-    empresa: ['Nosotros', 'Blog', 'Carreras', 'Prensa', 'Afiliados'],
-  };
-
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Gamepad2 className="h-8 w-8 text-primary" />
               <span className="text-xl font-display font-bold gradient-text">
-                GAME ZONE
+                TOPLEVEL
               </span>
             </div>
-            <p className="text-sm text-muted-foreground mb-4">
-              Tu tienda de confianza para códigos de juegos y suscripciones digitales.
+            <p className="text-sm text-muted-foreground">
+              Somos tu mejor aliado gamer. Juega, conecta y evoluciona al máximo nivel.
             </p>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary" />
-                <span>soporte@gamezone.mx</span>
+          </div>
+
+          {/* Productos */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Monitor className="h-5 w-5 text-primary" />
+              <h4 className="font-display font-bold text-foreground">Productos</h4>
+            </div>
+            <ul className="space-y-2">
+              <li className="flex items-center gap-2">
+                <CreditCard className="h-4 w-4 text-neon-green" />
+                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Recargas por ID
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Gift className="h-4 w-4 text-pink-500" />
+                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Gift cards
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <CreditCard className="h-4 w-4 text-yellow-500" />
+                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Recargas internas
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Tv className="h-4 w-4 text-purple-500" />
+                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Streaming
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Soporte */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <HelpCircle className="h-5 w-5 text-primary" />
+              <h4 className="font-display font-bold text-foreground">Soporte</h4>
+            </div>
+            <ul className="space-y-2">
+              <li className="flex items-center gap-2">
+                <MessageCircle className="h-4 w-4 text-pink-500" />
+                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Contacto
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <HelpCircle className="h-4 w-4 text-yellow-500" />
+                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  FAQ
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Horario */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Clock className="h-5 w-5 text-primary" />
+              <h4 className="font-display font-bold text-foreground">Horario</h4>
+            </div>
+            <div className="space-y-3">
+              <div>
+                <p className="text-sm font-semibold text-foreground">Horario de atención</p>
+                <p className="text-sm text-muted-foreground">11:00 AM - 11:59 PM</p>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary" />
-                <span>+52 (55) 1234-5678</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span>Ciudad de México, México</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Horario soporte técnico</p>
+                <p className="text-sm text-muted-foreground">10:00 AM - 9:00 PM</p>
               </div>
             </div>
           </div>
 
-          {/* Products */}
+          {/* Síguenos */}
           <div>
-            <h4 className="font-display font-bold text-foreground mb-4">Productos</h4>
+            <h4 className="font-display font-bold text-foreground mb-4">Síguenos</h4>
             <ul className="space-y-2">
-              {footerLinks.productos.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Help */}
-          <div>
-            <h4 className="font-display font-bold text-foreground mb-4">Ayuda</h4>
-            <ul className="space-y-2">
-              {footerLinks.ayuda.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-display font-bold text-foreground mb-4">Empresa</h4>
-            <ul className="space-y-2">
-              {footerLinks.empresa.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a href="#" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Facebook className="h-4 w-4 text-blue-500" />
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a href="#" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Instagram className="h-4 w-4 text-pink-500" />
+                  Instagram
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              © 2024 Game Zone. Todos los derechos reservados.
-            </p>
-            <div className="flex items-center gap-4">
-              <span className="text-xs text-muted-foreground">Métodos de pago:</span>
-              <div className="flex items-center gap-2">
-                {['Visa', 'MC', 'AMEX', 'PayPal', 'OXXO'].map((method) => (
-                  <span key={method} className="px-2 py-1 text-xs bg-muted rounded text-muted-foreground">
-                    {method}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+        <div className="mt-12 pt-8 border-t border-border text-center">
+          <p className="text-sm text-muted-foreground">
+            © 2025 TOPLEVEL. Todos los derechos reservados.
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            Las marcas comerciales y logotipos de los juegos pertenecen a sus respectivos propietarios.
+          </p>
         </div>
       </div>
     </footer>
