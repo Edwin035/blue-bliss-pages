@@ -188,4 +188,14 @@
       transform: translateY(-10px);
     }
   }
+
+  /* Hidden scrollbar but still scrollable */
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
 }
