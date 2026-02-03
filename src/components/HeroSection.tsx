@@ -49,7 +49,10 @@ const HeroSection = () => {
               Comprar Ahora
               <ChevronRight className="h-4 w-4" />
             </button>
-            <button className="px-6 py-2 rounded-lg font-semibold text-sm uppercase tracking-wider border border-primary text-primary hover:bg-primary/10 transition-all duration-300">
+            <button 
+              onClick={() => navigate('/catalogo')}
+              className="px-6 py-2 rounded-lg font-semibold text-sm uppercase tracking-wider border border-primary text-primary hover:bg-primary/10 transition-all duration-300"
+            >
               Ver Catálogo
             </button>
           </div>
