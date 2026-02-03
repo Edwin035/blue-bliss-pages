@@ -11,14 +11,12 @@ import { format, differenceInYears } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 
-interface AuthDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { useAuth } from '@/contexts/AuthContext';
 
 type AuthView = 'login' | 'register' | 'recover';
 
-const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
+const AuthDialog = () => {
+  const { isAuthOpen, setIsAuthOpen } = useAuth();
   const [view, setView] = useState<AuthView>('login');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -118,11 +116,11 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
   const handleClose = () => {
     resetForms();
     setView('login');
-    onClose();
+    setIsAuthOpen(false);
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog open={isAuthOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md bg-card border-border">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-display">

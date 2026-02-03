@@ -2,13 +2,13 @@ import { ShoppingCart, Search, User, Menu, Gamepad2 } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 import SearchDialog from '@/components/SearchDialog';
-import AuthDialog from '@/components/AuthDialog';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const { setIsAuthOpen } = useAuth();
   const { totalItems, setIsOpen } = useCart();
 
   const navItems = [
@@ -22,7 +22,6 @@ const Navbar = () => {
   return (
     <>
       <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-      <AuthDialog isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
       <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
