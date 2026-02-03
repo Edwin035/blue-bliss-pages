@@ -15,14 +15,14 @@ const ProductCard = ({ id, image, title, platform, originalPrice, discountPrice,
     <Link to={`/producto/${id}`} className="block">
       <div className="card-gaming group">
         {/* Image Container */}
-        <div className="relative aspect-square overflow-hidden">
+        <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden">
           <img 
             src={image} 
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           {discount && (
-            <div className="absolute top-3 right-3 px-2 py-1 bg-primary text-primary-foreground text-xs font-bold rounded">
+            <div className="absolute top-2 right-2 sm:top-3 sm:right-3 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-primary text-primary-foreground text-[10px] sm:text-xs font-bold rounded">
               -{discount}%
             </div>
           )}
@@ -30,26 +30,26 @@ const ProductCard = ({ id, image, title, platform, originalPrice, discountPrice,
         </div>
 
         {/* Content */}
-        <div className="p-4">
-          <span className="text-xs text-primary font-medium uppercase tracking-wider">
+        <div className="p-2.5 sm:p-4">
+          <span className="text-[10px] sm:text-xs text-primary font-medium uppercase tracking-wider">
             {platform}
           </span>
-          <h3 className="text-sm font-semibold text-foreground mt-1 line-clamp-2 min-h-[40px]">
+          <h3 className="text-xs sm:text-sm font-semibold text-foreground mt-0.5 sm:mt-1 line-clamp-2 min-h-[32px] sm:min-h-[40px]">
             {title}
           </h3>
           
-          <div className="flex items-center gap-2 mt-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 mt-2 sm:mt-3">
             {discount && (
-              <span className="text-xs text-muted-foreground line-through">
-                ${originalPrice.toLocaleString()} USD
+              <span className="text-[10px] sm:text-xs text-muted-foreground line-through">
+                ${originalPrice.toLocaleString()}
               </span>
             )}
-            <span className="text-lg font-bold text-neon-green">
+            <span className="text-sm sm:text-lg font-bold text-neon-green">
               ${discountPrice.toLocaleString()} USD
             </span>
           </div>
 
-          <button className="w-full mt-4 btn-gaming text-center">
+          <button className="w-full mt-2.5 sm:mt-4 py-1.5 sm:py-2 text-xs sm:text-sm btn-gaming text-center">
             Comprar
           </button>
         </div>
