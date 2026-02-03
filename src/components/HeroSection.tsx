@@ -1,7 +1,20 @@
 import heroImage from '@/assets/hero-gaming.jpg';
 import { ChevronRight, Zap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthOpen } = useAuth();
+
+  const handleBuyClick = () => {
+    if (isAuthenticated) {
+      navigate('/catalogo');
+    } else {
+      setIsAuthOpen(true);
+    }
+  };
+
   return (
     <section className="relative min-h-[500px] md:min-h-[600px] overflow-hidden">
       {/* Background Image */}
@@ -32,7 +45,7 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <button className="btn-gaming flex items-center gap-2">
+            <button onClick={handleBuyClick} className="btn-gaming flex items-center gap-2">
               Comprar Ahora
               <ChevronRight className="h-4 w-4" />
             </button>
