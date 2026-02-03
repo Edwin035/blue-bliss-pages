@@ -236,7 +236,7 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
 
             <div className="space-y-2">
               <Label>Fecha de nacimiento</Label>
-              <Popover>
+              <Popover modal={true}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -253,19 +253,28 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
                     )}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 max-h-[340px] overflow-auto" align="center" sideOffset={8}>
-                  <Calendar
-                    mode="single"
-                    selected={registerForm.birthDate}
-                    onSelect={(date) => setRegisterForm({ ...registerForm, birthDate: date })}
-                    disabled={(date) => date > maxBirthDate || date < new Date("1900-01-01")}
-                    initialFocus
-                    className={cn("p-3 pointer-events-auto")}
-                    captionLayout="dropdown-buttons"
-                    fromYear={1940}
-                    toYear={maxBirthDate.getFullYear()}
-                    defaultMonth={new Date(2000, 0)}
-                  />
+                <PopoverContent 
+                  className="w-auto p-0 z-[100]" 
+                  align="center" 
+                  side="bottom"
+                  sideOffset={4}
+                  avoidCollisions={true}
+                  collisionPadding={16}
+                >
+                  <div className="max-h-[280px] overflow-y-auto overscroll-contain touch-pan-y">
+                    <Calendar
+                      mode="single"
+                      selected={registerForm.birthDate}
+                      onSelect={(date) => setRegisterForm({ ...registerForm, birthDate: date })}
+                      disabled={(date) => date > maxBirthDate || date < new Date("1900-01-01")}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                      captionLayout="dropdown-buttons"
+                      fromYear={1940}
+                      toYear={maxBirthDate.getFullYear()}
+                      defaultMonth={new Date(2000, 0)}
+                    />
+                  </div>
                 </PopoverContent>
               </Popover>
               <p className="text-xs text-muted-foreground">Debes ser mayor de 18 años</p>
