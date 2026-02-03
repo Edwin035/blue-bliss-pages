@@ -122,8 +122,8 @@ const AuthDialog = () => {
   return (
     <Dialog open={isAuthOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md bg-card border-border">
-        <DialogHeader>
-          <DialogTitle className="text-center text-xl font-display">
+        <DialogHeader className="pb-2">
+          <DialogTitle className="text-center text-lg sm:text-xl font-display">
             {view === 'login' && 'Iniciar Sesión'}
             {view === 'register' && 'Crear Cuenta'}
             {view === 'recover' && 'Recuperar Contraseña'}
@@ -132,16 +132,16 @@ const AuthDialog = () => {
 
         {/* Login Form */}
         {view === 'login' && (
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="login-email">Correo electrónico</Label>
+          <form onSubmit={handleLogin} className="space-y-3 sm:space-y-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="login-email" className="text-sm">Correo electrónico</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="login-email"
                   type="email"
                   placeholder="tu@email.com"
-                  className="pl-10"
+                  className="pl-10 h-10 sm:h-11 text-sm"
                   value={loginForm.email}
                   onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                   required
@@ -149,15 +149,15 @@ const AuthDialog = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="login-password">Contraseña</Label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="login-password" className="text-sm">Contraseña</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="login-password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
-                  className="pl-10 pr-10"
+                  className="pl-10 pr-10 h-10 sm:h-11 text-sm"
                   value={loginForm.password}
                   onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
                   required
@@ -165,7 +165,7 @@ const AuthDialog = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1"
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -175,16 +175,16 @@ const AuthDialog = () => {
             <button
               type="button"
               onClick={() => handleViewChange('recover')}
-              className="text-sm text-primary hover:underline"
+              className="text-xs sm:text-sm text-primary hover:underline"
             >
               ¿Olvidaste tu contraseña?
             </button>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full h-10 sm:h-11 text-sm" disabled={isLoading}>
               {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
             </Button>
 
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-xs sm:text-sm text-muted-foreground">
               ¿No tienes cuenta?{' '}
               <button
                 type="button"
@@ -199,16 +199,16 @@ const AuthDialog = () => {
 
         {/* Register Form */}
         {view === 'register' && (
-          <form onSubmit={handleRegister} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="register-name">Nombre</Label>
+          <form onSubmit={handleRegister} className="space-y-3 sm:space-y-4">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="register-name" className="text-sm">Nombre</Label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="register-name"
                   type="text"
                   placeholder="Tu nombre"
-                  className="pl-10"
+                  className="pl-10 h-10 sm:h-11 text-sm"
                   value={registerForm.name}
                   onChange={(e) => setRegisterForm({ ...registerForm, name: e.target.value })}
                   required
@@ -216,15 +216,15 @@ const AuthDialog = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="register-email">Correo electrónico</Label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="register-email" className="text-sm">Correo electrónico</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="register-email"
                   type="email"
                   placeholder="tu@email.com"
-                  className="pl-10"
+                  className="pl-10 h-10 sm:h-11 text-sm"
                   value={registerForm.email}
                   onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
                   required
@@ -232,22 +232,22 @@ const AuthDialog = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label>Fecha de nacimiento</Label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label className="text-sm">Fecha de nacimiento</Label>
               <Popover modal={true}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal h-10 sm:h-11 text-sm",
                       !registerForm.birthDate && "text-muted-foreground"
                     )}
                   >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
                     {registerForm.birthDate ? (
                       format(registerForm.birthDate, "PPP", { locale: es })
                     ) : (
-                      <span>Selecciona tu fecha de nacimiento</span>
+                      <span className="truncate">Selecciona tu fecha</span>
                     )}
                   </Button>
                 </PopoverTrigger>
@@ -266,7 +266,7 @@ const AuthDialog = () => {
                       onSelect={(date) => setRegisterForm({ ...registerForm, birthDate: date })}
                       disabled={(date) => date > maxBirthDate || date < new Date("1900-01-01")}
                       initialFocus
-                      className={cn("p-3 pointer-events-auto")}
+                      className={cn("p-2 sm:p-3 pointer-events-auto")}
                       captionLayout="dropdown-buttons"
                       fromYear={1940}
                       toYear={maxBirthDate.getFullYear()}
@@ -275,18 +275,18 @@ const AuthDialog = () => {
                   </div>
                 </PopoverContent>
               </Popover>
-              <p className="text-xs text-muted-foreground">Debes ser mayor de 18 años</p>
+              <p className="text-[11px] sm:text-xs text-muted-foreground">Debes ser mayor de 18 años</p>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="register-password">Contraseña</Label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="register-password" className="text-sm">Contraseña</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="register-password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
-                  className="pl-10 pr-10"
+                  className="pl-10 pr-10 h-10 sm:h-11 text-sm"
                   value={registerForm.password}
                   onChange={(e) => setRegisterForm({ ...registerForm, password: e.target.value })}
                   required
@@ -295,22 +295,22 @@ const AuthDialog = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1"
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="register-confirm">Confirmar contraseña</Label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="register-confirm" className="text-sm">Confirmar contraseña</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="register-confirm"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
-                  className="pl-10"
+                  className="pl-10 h-10 sm:h-11 text-sm"
                   value={registerForm.confirmPassword}
                   onChange={(e) => setRegisterForm({ ...registerForm, confirmPassword: e.target.value })}
                   required
@@ -319,11 +319,11 @@ const AuthDialog = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full h-10 sm:h-11 text-sm" disabled={isLoading}>
               {isLoading ? 'Creando cuenta...' : 'Crear Cuenta'}
             </Button>
 
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-xs sm:text-sm text-muted-foreground">
               ¿Ya tienes cuenta?{' '}
               <button
                 type="button"
@@ -338,29 +338,29 @@ const AuthDialog = () => {
 
         {/* Recover Password Form */}
         {view === 'recover' && (
-          <form onSubmit={handleRecover} className="space-y-4">
+          <form onSubmit={handleRecover} className="space-y-3 sm:space-y-4">
             <button
               type="button"
               onClick={() => handleViewChange('login')}
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+              className="flex items-center gap-1 text-xs sm:text-sm text-muted-foreground hover:text-foreground"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               Volver al inicio de sesión
             </button>
 
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.
             </p>
 
-            <div className="space-y-2">
-              <Label htmlFor="recover-email">Correo electrónico</Label>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="recover-email" className="text-sm">Correo electrónico</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="recover-email"
                   type="email"
                   placeholder="tu@email.com"
-                  className="pl-10"
+                  className="pl-10 h-10 sm:h-11 text-sm"
                   value={recoverForm.email}
                   onChange={(e) => setRecoverForm({ ...recoverForm, email: e.target.value })}
                   required
@@ -368,7 +368,7 @@ const AuthDialog = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full h-10 sm:h-11 text-sm" disabled={isLoading}>
               {isLoading ? 'Enviando...' : 'Enviar Instrucciones'}
             </Button>
           </form>
