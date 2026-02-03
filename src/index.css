@@ -143,6 +143,23 @@
   .section-title {
     @apply text-2xl md:text-3xl font-bold tracking-wide;
   }
+
+  /* Calendar dropdown styles for dark theme */
+  .rdp-dropdown {
+    color-scheme: dark;
+  }
+  
+  .rdp-dropdown option {
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
+    padding: 8px 12px;
+  }
+  
+  .rdp-dropdown option:checked,
+  .rdp-dropdown option:hover {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
 }
 
 @layer utilities {
