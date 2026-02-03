@@ -12,8 +12,8 @@ interface ProductCardProps {
 
 const ProductCard = ({ id, image, title, platform, originalPrice, discountPrice, discount }: ProductCardProps) => {
   return (
-    <Link to={`/producto/${id}`} className="block">
-      <div className="card-gaming group">
+    <Link to={`/producto/${id}`} className="block h-full">
+      <div className="card-gaming group h-full flex flex-col">
         {/* Image Container */}
         <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden">
           <img 
@@ -30,7 +30,7 @@ const ProductCard = ({ id, image, title, platform, originalPrice, discountPrice,
         </div>
 
         {/* Content */}
-        <div className="p-2.5 sm:p-4">
+        <div className="p-2.5 sm:p-4 flex flex-col flex-grow">
           <span className="text-[10px] sm:text-xs text-primary font-medium uppercase tracking-wider">
             {platform}
           </span>
@@ -49,7 +49,7 @@ const ProductCard = ({ id, image, title, platform, originalPrice, discountPrice,
             </span>
           </div>
 
-          <button className="w-full mt-2.5 sm:mt-4 py-1.5 sm:py-2 text-xs sm:text-sm btn-gaming text-center">
+          <button className="w-full mt-auto pt-2.5 sm:pt-4 py-1.5 sm:py-2 text-xs sm:text-sm btn-gaming text-center">
             Comprar
           </button>
         </div>
