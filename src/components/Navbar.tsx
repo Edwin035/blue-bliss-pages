@@ -1,5 +1,6 @@
 import { ShoppingCart, Search, User, Menu, Gamepad2 } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
 
 const Navbar = () => {
@@ -7,11 +8,11 @@ const Navbar = () => {
   const { totalItems, setIsOpen } = useCart();
 
   const navItems = [
-    { name: 'PlayStation', href: '#playstation' },
-    { name: 'Xbox', href: '#xbox' },
-    { name: 'Steam', href: '#steam' },
-    { name: 'Mobile', href: '#mobile' },
-    { name: 'Ofertas', href: '#ofertas' },
+    { name: 'PlayStation', href: '/catalogo?platform=PlayStation' },
+    { name: 'Free Fire', href: '/catalogo?platform=Mobile' },
+    { name: 'Steam', href: '/catalogo?platform=Steam' },
+    { name: 'Mobile', href: '/catalogo?platform=Mobile' },
+    { name: 'Ofertas', href: '/catalogo' },
   ];
 
   return (
@@ -19,23 +20,23 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <Gamepad2 className="h-8 w-8 text-primary" />
             <span className="text-xl font-display font-bold gradient-text">
               GAME ZONE
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -71,13 +72,14 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="block py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         )}
