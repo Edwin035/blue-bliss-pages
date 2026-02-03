@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { allProducts, Product } from '@/data/products';
 import { ChevronRight } from 'lucide-react';
@@ -20,10 +21,10 @@ const ProductSection = ({ title, subtitle, products }: ProductSectionProps) => {
               <p className="text-muted-foreground mt-1">{subtitle}</p>
             )}
           </div>
-          <button className="hidden md:flex items-center gap-2 text-primary hover:text-secondary transition-colors">
+          <Link to="/catalogo" className="hidden md:flex items-center gap-2 text-primary hover:text-secondary transition-colors">
             <span className="text-sm font-medium">Ver todo</span>
             <ChevronRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
 
         {/* Products Grid */}
@@ -35,9 +36,9 @@ const ProductSection = ({ title, subtitle, products }: ProductSectionProps) => {
 
         {/* Mobile View All */}
         <div className="md:hidden mt-6 text-center">
-          <button className="text-primary hover:text-secondary transition-colors text-sm font-medium">
+          <Link to="/catalogo" className="text-primary hover:text-secondary transition-colors text-sm font-medium">
             Ver todos los productos →
-          </button>
+          </Link>
         </div>
       </div>
     </section>
