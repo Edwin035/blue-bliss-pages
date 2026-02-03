@@ -5,18 +5,23 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import ProfileSidebar from '@/components/profile/ProfileSidebar';
+import OrderDetailModal from '@/components/OrderDetailModal';
+
+interface OrderItem {
+  name: string;
+  quantity: number;
+  price: number;
+  image: string;
+  pins?: string[];
+}
 
 interface Order {
   id: string;
   date: string;
   status: 'completed' | 'pending' | 'cancelled';
   total: number;
-  items: {
-    name: string;
-    quantity: number;
-    price: number;
-    image: string;
-  }[];
+  items: OrderItem[];
+  playerIds?: string[];
 }
 
 const mockOrders: Order[] = [
@@ -25,8 +30,15 @@ const mockOrders: Order[] = [
     date: '2024-01-15',
     status: 'completed',
     total: 59.99,
+    playerIds: ['123456789', '987654321'],
     items: [
-      { name: 'PlayStation Plus 12 Meses', quantity: 1, price: 59.99, image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=100&h=100&fit=crop' }
+      { 
+        name: 'PlayStation Plus 12 Meses', 
+        quantity: 1, 
+        price: 59.99, 
+        image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=100&h=100&fit=crop',
+        pins: ['B115-545B-9351-WAZ2', 'C226-656C-1462-XBZ3']
+      }
     ]
   },
   {
@@ -34,8 +46,15 @@ const mockOrders: Order[] = [
     date: '2024-01-10',
     status: 'completed',
     total: 25.00,
+    playerIds: ['555123456'],
     items: [
-      { name: 'Steam Gift Card $25', quantity: 1, price: 25.00, image: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=100&h=100&fit=crop' }
+      { 
+        name: 'Steam Gift Card $25', 
+        quantity: 1, 
+        price: 25.00, 
+        image: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=100&h=100&fit=crop',
+        pins: ['STEAM-XXXX-YYYY-ZZZZ']
+      }
     ]
   },
   {
@@ -44,7 +63,12 @@ const mockOrders: Order[] = [
     status: 'pending',
     total: 10.00,
     items: [
-      { name: 'Free Fire 1000 Diamantes', quantity: 1, price: 10.00, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&h=100&fit=crop' }
+      { 
+        name: 'Free Fire 1000 Diamantes', 
+        quantity: 1, 
+        price: 10.00, 
+        image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&h=100&fit=crop'
+      }
     ]
   },
 ];
@@ -63,9 +87,16 @@ const statusLabels = {
 
 const OrderHistoryPage = () => {
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleOrder = (orderId: string) => {
     setExpandedOrder(expandedOrder === orderId ? null : orderId);
+  };
+
+  const openOrderDetail = (order: Order) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
   };
 
   const formatDate = (dateString: string) => {
@@ -164,7 +195,12 @@ const OrderHistoryPage = () => {
                               <span className="text-sm text-muted-foreground">Total: </span>
                               <span className="font-bold text-neon-green">${order.total.toFixed(2)}</span>
                             </div>
-                            <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="w-full sm:w-auto"
+                              onClick={() => openOrderDetail(order)}
+                            >
                               <Eye className="h-4 w-4 mr-2" />
                               Ver Detalles
                             </Button>
@@ -184,6 +220,12 @@ const OrderHistoryPage = () => {
       </main>
       
       <Footer />
+      
+      <OrderDetailModal 
+        order={selectedOrder}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+      />
     </div>
   );
 };
