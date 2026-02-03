@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, CalendarIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
+import { DatePickerBirth } from '@/components/ui/date-picker-birth';
 import { format, differenceInYears } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
@@ -259,20 +259,13 @@ const AuthDialog = () => {
                   avoidCollisions={true}
                   collisionPadding={16}
                 >
-                  <div className="max-h-[280px] overflow-y-auto overscroll-contain touch-pan-y">
-                    <Calendar
-                      mode="single"
-                      selected={registerForm.birthDate}
-                      onSelect={(date) => setRegisterForm({ ...registerForm, birthDate: date })}
-                      disabled={(date) => date > maxBirthDate || date < new Date("1900-01-01")}
-                      initialFocus
-                      className={cn("p-2 sm:p-3 pointer-events-auto")}
-                      captionLayout="dropdown-buttons"
-                      fromYear={1940}
-                      toYear={maxBirthDate.getFullYear()}
-                      defaultMonth={new Date(2000, 0)}
-                    />
-                  </div>
+                  <DatePickerBirth
+                    selected={registerForm.birthDate}
+                    onSelect={(date) => setRegisterForm({ ...registerForm, birthDate: date })}
+                    disabled={(date) => date > maxBirthDate || date < new Date("1900-01-01")}
+                    fromYear={1940}
+                    toYear={maxBirthDate.getFullYear()}
+                  />
                 </PopoverContent>
               </Popover>
               <p className="text-[11px] sm:text-xs text-muted-foreground">Debes ser mayor de 18 años</p>
