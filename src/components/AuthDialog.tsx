@@ -253,7 +253,7 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
                     )}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 max-h-[340px] overflow-auto" align="center" sideOffset={8}>
                   <Calendar
                     mode="single"
                     selected={registerForm.birthDate}
@@ -262,8 +262,9 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
                     initialFocus
                     className={cn("p-3 pointer-events-auto")}
                     captionLayout="dropdown-buttons"
-                    fromYear={1900}
+                    fromYear={1940}
                     toYear={maxBirthDate.getFullYear()}
+                    defaultMonth={new Date(2000, 0)}
                   />
                 </PopoverContent>
               </Popover>
