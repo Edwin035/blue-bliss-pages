@@ -1,62 +1,51 @@
 import { useState } from 'react';
-import { Package, ChevronUp, ChevronDown, Copy, Gift } from 'lucide-react';
+import { Package, Calendar, ChevronDown, ChevronUp, Eye } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import ProfileSidebar from '@/components/profile/ProfileSidebar';
-import { toast } from 'sonner';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 
 interface Order {
   id: string;
-  productName: string;
-  productCategory: string;
   date: string;
-  time: string;
   status: 'completed' | 'pending' | 'cancelled';
   total: number;
-  playerIds?: string[];
-  pinCodes?: string[];
+  items: {
+    name: string;
+    quantity: number;
+    price: number;
+    image: string;
+  }[];
 }
 
 const mockOrders: Order[] = [
   {
-    id: 'ORD123456789',
-    productName: 'Free Fire Diamantes',
-    productCategory: 'Recarga de Juego',
-    date: '12/01/2026',
-    time: '14:30',
-    status: 'completed',
-    total: 15.00,
-    playerIds: ['123456789', '987654321'],
-    pinCodes: ['B115-545B-9351-WAZ2', 'C226-656C-1462-XBZ3']
-  },
-  {
-    id: 'ORD987654321',
-    productName: 'PlayStation Plus 12 Meses',
-    productCategory: 'Suscripción',
-    date: '10/01/2026',
-    time: '09:15',
+    id: 'ORD-001',
+    date: '2024-01-15',
     status: 'completed',
     total: 59.99,
-    pinCodes: ['PS12-ABCD-EFGH-1234']
+    items: [
+      { name: 'PlayStation Plus 12 Meses', quantity: 1, price: 59.99, image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=100&h=100&fit=crop' }
+    ]
   },
   {
-    id: 'ORD456789123',
-    productName: 'Steam Gift Card $25',
-    productCategory: 'Tarjeta de Regalo',
-    date: '05/01/2026',
-    time: '18:45',
-    status: 'pending',
+    id: 'ORD-002',
+    date: '2024-01-10',
+    status: 'completed',
     total: 25.00,
+    items: [
+      { name: 'Steam Gift Card $25', quantity: 1, price: 25.00, image: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=100&h=100&fit=crop' }
+    ]
+  },
+  {
+    id: 'ORD-003',
+    date: '2024-01-05',
+    status: 'pending',
+    total: 10.00,
+    items: [
+      { name: 'Free Fire 1000 Diamantes', quantity: 1, price: 10.00, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&h=100&fit=crop' }
+    ]
   },
 ];
 
@@ -67,9 +56,9 @@ const statusColors = {
 };
 
 const statusLabels = {
-  completed: 'COMPLETADO',
-  pending: 'PENDIENTE',
-  cancelled: 'CANCELADO',
+  completed: 'Completado',
+  pending: 'Pendiente',
+  cancelled: 'Cancelado',
 };
 
 const OrderHistoryPage = () => {
@@ -79,9 +68,12 @@ const OrderHistoryPage = () => {
     setExpandedOrder(expandedOrder === orderId ? null : orderId);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success('PIN copiado al portapapeles');
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   };
 
   return (
@@ -107,122 +99,83 @@ const OrderHistoryPage = () => {
                   <p className="text-muted-foreground">No tienes compras aún</p>
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-primary hover:bg-primary">
-                        <TableHead className="text-primary-foreground font-semibold">Pedido</TableHead>
-                        <TableHead className="text-primary-foreground font-semibold">Producto</TableHead>
-                        <TableHead className="text-primary-foreground font-semibold">Fecha</TableHead>
-                        <TableHead className="text-primary-foreground font-semibold">Estado</TableHead>
-                        <TableHead className="text-primary-foreground font-semibold text-right">Total</TableHead>
-                        <TableHead className="text-primary-foreground font-semibold text-right">Detalles</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {mockOrders.map((order) => (
-                        <>
-                          <TableRow key={order.id} className="border-b border-border">
-                            <TableCell className="font-medium">#{order.id}</TableCell>
-                            <TableCell>
-                              <div>
-                                <p className="font-medium">{order.productName}</p>
-                                <p className="text-sm text-muted-foreground">{order.productCategory}</p>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <div>
-                                <p>{order.date}</p>
-                                <p className="text-sm text-muted-foreground">{order.time}</p>
-                              </div>
-                            </TableCell>
-                            <TableCell>
-                              <Badge className={`${statusColors[order.status]} text-xs`}>
-                                {statusLabels[order.status]}
-                              </Badge>
-                            </TableCell>
-                            <TableCell className="text-right font-bold">
-                              {order.total.toFixed(2)} USDT
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => toggleOrder(order.id)}
-                                className="hover:bg-muted"
-                              >
-                                {expandedOrder === order.id ? (
-                                  <ChevronUp className="h-4 w-4" />
-                                ) : (
-                                  <ChevronDown className="h-4 w-4" />
-                                )}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                          
-                          {expandedOrder === order.id && (
-                            <TableRow key={`${order.id}-details`}>
-                              <TableCell colSpan={6} className="bg-muted/30 p-4">
-                                <div className="space-y-4">
-                                  {order.playerIds && order.playerIds.length > 0 && (
-                                    <div>
-                                      <p className="text-sm text-muted-foreground mb-2">IDs de Jugador:</p>
-                                      <div className="flex flex-wrap gap-2">
-                                        {order.playerIds.map((id, index) => (
-                                          <span
-                                            key={index}
-                                            className="px-3 py-1.5 bg-background border border-border rounded-md text-sm"
-                                          >
-                                            {id}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                  
-                                  {order.pinCodes && order.pinCodes.length > 0 && (
-                                    <div>
-                                      <p className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
-                                        <Gift className="h-4 w-4 text-primary" />
-                                        Códigos PIN Generados:
-                                      </p>
-                                      <div className="space-y-2">
-                                        {order.pinCodes.map((pin, index) => (
-                                          <div
-                                            key={index}
-                                            className="flex items-center justify-between bg-background border border-border rounded-lg p-3"
-                                          >
-                                            <span className="font-mono text-base sm:text-lg font-medium">
-                                              {pin}
-                                            </span>
-                                            <Button
-                                              variant="outline"
-                                              size="sm"
-                                              onClick={() => copyToClipboard(pin)}
-                                              className="flex items-center gap-2"
-                                            >
-                                              <Copy className="h-4 w-4" />
-                                              Copiar PIN
-                                            </Button>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                  
-                                  {!order.pinCodes && !order.playerIds && (
-                                    <p className="text-sm text-muted-foreground">
-                                      Los detalles estarán disponibles cuando se complete el pedido.
-                                    </p>
-                                  )}
-                                </div>
-                              </TableCell>
-                            </TableRow>
+                <div className="space-y-4">
+                  {mockOrders.map((order) => (
+                    <div
+                      key={order.id}
+                      className="border border-border rounded-lg overflow-hidden"
+                    >
+                      {/* Order Header */}
+                      <button
+                        onClick={() => toggleOrder(order.id)}
+                        className="w-full p-3 sm:p-4 flex items-center justify-between bg-muted/30 hover:bg-muted/50 transition-colors"
+                      >
+                        <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                          <div className="text-left min-w-0">
+                            <p className="font-medium text-sm sm:text-base truncate">{order.id}</p>
+                            <p className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1">
+                              <Calendar className="h-3 w-3 flex-shrink-0" />
+                              <span className="truncate">{formatDate(order.date)}</span>
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                          <Badge className={`${statusColors[order.status]} text-[10px] sm:text-xs`}>
+                            {statusLabels[order.status]}
+                          </Badge>
+                          <span className="font-bold text-sm sm:text-base text-neon-green hidden sm:block">
+                            ${order.total.toFixed(2)}
+                          </span>
+                          {expandedOrder === order.id ? (
+                            <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
                           )}
-                        </>
-                      ))}
-                    </TableBody>
-                  </Table>
+                        </div>
+                      </button>
+                      
+                      {/* Order Details */}
+                      {expandedOrder === order.id && (
+                        <div className="p-3 sm:p-4 border-t border-border bg-background/50">
+                          <div className="space-y-3">
+                            {order.items.map((item, index) => (
+                              <div key={index} className="flex items-center gap-3">
+                                <img
+                                  src={item.image}
+                                  alt={item.name}
+                                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg object-cover flex-shrink-0"
+                                />
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium truncate">{item.name}</p>
+                                  <p className="text-xs text-muted-foreground">
+                                    Cantidad: {item.quantity}
+                                  </p>
+                                </div>
+                                <span className="text-sm font-medium text-neon-green flex-shrink-0">
+                                  ${item.price.toFixed(2)}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <div className="mt-4 pt-4 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <div className="sm:hidden">
+                              <span className="text-sm text-muted-foreground">Total: </span>
+                              <span className="font-bold text-neon-green">${order.total.toFixed(2)}</span>
+                            </div>
+                            <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                              <Eye className="h-4 w-4 mr-2" />
+                              Ver Detalles
+                            </Button>
+                            <span className="font-bold text-lg text-neon-green hidden sm:block">
+                              Total: ${order.total.toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
