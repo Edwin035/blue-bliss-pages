@@ -3,8 +3,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, Mail, Lock, User, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, CalendarIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { format, differenceInYears } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { cn } from '@/lib/utils';
 
 interface AuthDialogProps {
   isOpen: boolean;
@@ -21,7 +26,7 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
 
   // Form states
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
-  const [registerForm, setRegisterForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [registerForm, setRegisterForm] = useState({ name: '', email: '', password: '', confirmPassword: '', birthDate: undefined as Date | undefined });
   const [recoverForm, setRecoverForm] = useState({ email: '' });
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -40,6 +45,25 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!registerForm.birthDate) {
+      toast({
+        title: "Error",
+        description: "Por favor, selecciona tu fecha de nacimiento.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const age = differenceInYears(new Date(), registerForm.birthDate);
+    if (age < 18) {
+      toast({
+        title: "Error",
+        description: "Debes ser mayor de 18 años para registrarte.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     if (registerForm.password !== registerForm.confirmPassword) {
       toast({
@@ -77,10 +101,14 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
 
   const resetForms = () => {
     setLoginForm({ email: '', password: '' });
-    setRegisterForm({ name: '', email: '', password: '', confirmPassword: '' });
+    setRegisterForm({ name: '', email: '', password: '', confirmPassword: '', birthDate: undefined });
     setRecoverForm({ email: '' });
     setShowPassword(false);
   };
+
+  // Calculate max date (18 years ago from today)
+  const maxBirthDate = new Date();
+  maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 18);
 
   const handleViewChange = (newView: AuthView) => {
     resetForms();
@@ -204,6 +232,42 @@ const AuthDialog = ({ isOpen, onClose }: AuthDialogProps) => {
                   required
                 />
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Fecha de nacimiento</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !registerForm.birthDate && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {registerForm.birthDate ? (
+                      format(registerForm.birthDate, "PPP", { locale: es })
+                    ) : (
+                      <span>Selecciona tu fecha de nacimiento</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={registerForm.birthDate}
+                    onSelect={(date) => setRegisterForm({ ...registerForm, birthDate: date })}
+                    disabled={(date) => date > maxBirthDate || date < new Date("1900-01-01")}
+                    initialFocus
+                    className={cn("p-3 pointer-events-auto")}
+                    captionLayout="dropdown-buttons"
+                    fromYear={1900}
+                    toYear={maxBirthDate.getFullYear()}
+                  />
+                </PopoverContent>
+              </Popover>
+              <p className="text-xs text-muted-foreground">Debes ser mayor de 18 años</p>
             </div>
 
             <div className="space-y-2">
