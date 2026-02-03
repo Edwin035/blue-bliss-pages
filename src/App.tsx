@@ -11,6 +11,9 @@ import AuthDialog from "./components/AuthDialog";
 import Index from "./pages/Index";
 import ProductPage from "./pages/ProductPage";
 import CatalogPage from "./pages/CatalogPage";
+import ProfilePage from "./pages/ProfilePage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +33,9 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/catalogo" element={<CatalogPage />} />
               <Route path="/producto/:id" element={<ProductPage />} />
+              <Route path="/perfil" element={<ProfilePage />} />
+              <Route path="/cambiar-contrasena" element={<ChangePasswordPage />} />
+              <Route path="/historial" element={<OrderHistoryPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
