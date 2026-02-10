@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { ChevronLeft } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -9,13 +9,14 @@ import { getProductById, getRelatedProducts } from '@/data/products';
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { isAuthenticated, setIsAuthOpen } = useAuth();
+  const navigate = useNavigate();
 
   const handleBuy = () => {
     if (!isAuthenticated) {
       setIsAuthOpen(true);
       return;
     }
-    // TODO: lógica de compra
+    navigate(`/checkout/${id}`);
   };
   const product = getProductById(Number(id));
   const relatedProducts = product ? getRelatedProducts(product, 4) : [];

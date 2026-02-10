@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import AuthDialog from "./components/AuthDialog";
 import Index from "./pages/Index";
 import ProductPage from "./pages/ProductPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import CatalogPage from "./pages/CatalogPage";
 import ProfilePage from "./pages/ProfilePage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/catalogo" element={<CatalogPage />} />
             <Route path="/producto/:id" element={<ProductPage />} />
+            <Route path="/checkout/:id" element={<CheckoutPage />} />
             <Route path="/perfil" element={<ProfilePage />} />
             <Route path="/cambiar-contrasena" element={<ChangePasswordPage />} />
             <Route path="/historial" element={<OrderHistoryPage />} />
