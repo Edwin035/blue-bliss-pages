@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ProductSection, { sampleProducts } from '@/components/ProductSection';
 import PromoBanner from '@/components/PromoBanner';
+import PartnerBanner from '@/components/PartnerBanner';
 import FeaturesBar from '@/components/FeaturesBar';
 import Footer from '@/components/Footer';
 import xboxImg from '@/assets/xbox.jpg';
@@ -55,9 +56,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Steam Section */}
-  
-  
+      {/* Partner Banner */}
+      <PartnerBanner />
 
       <Footer />
     </div>
