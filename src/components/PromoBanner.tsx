@@ -30,8 +30,9 @@ const PromoBanner = ({
       >
         {/* Content */}
         <div className="flex-1 p-6 md:p-10">
-          <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
-            {title}
+          <h3 className="text-2xl md:text-3xl font-display font-bold mb-2">
+            <span className="text-foreground">{title.split(' ').slice(0, -1).join(' ')} </span>
+            <span className="gradient-text">{title.split(' ').slice(-1)}</span>
           </h3>
           <p className="text-muted-foreground mb-4">{subtitle}</p>
 
