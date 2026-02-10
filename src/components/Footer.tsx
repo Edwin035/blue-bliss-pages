@@ -80,9 +80,9 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <HelpCircle className="h-4 w-4 text-yellow-500" />
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/#faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   FAQ
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
