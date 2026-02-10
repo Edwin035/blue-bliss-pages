@@ -16,7 +16,7 @@ import { useAuth } from '@/contexts/AuthContext';
 type AuthView = 'login' | 'register' | 'recover';
 
 const AuthDialog = () => {
-  const { isAuthOpen, setIsAuthOpen } = useAuth();
+  const { isAuthOpen, setIsAuthOpen, login } = useAuth();
   const [view, setView] = useState<AuthView>('login');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,14 +31,14 @@ const AuthDialog = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      login();
       toast({
-        title: "Función en desarrollo",
-        description: "El inicio de sesión estará disponible pronto.",
+        title: "¡Bienvenido!",
+        description: "Has iniciado sesión correctamente.",
       });
-    }, 1000);
+    }, 500);
   };
 
   const handleRegister = async (e: React.FormEvent) => {
