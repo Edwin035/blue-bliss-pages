@@ -3,10 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import ScrollToTop from "./components/ScrollToTop";
-import CartDrawer from "./components/CartDrawer";
 import AuthDialog from "./components/AuthDialog";
 import Index from "./pages/Index";
 import ProductPage from "./pages/ProductPage";
@@ -23,26 +21,23 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <CartProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <CartDrawer />
-            <AuthDialog />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/catalogo" element={<CatalogPage />} />
-              <Route path="/producto/:id" element={<ProductPage />} />
-              <Route path="/perfil" element={<ProfilePage />} />
-              <Route path="/cambiar-contrasena" element={<ChangePasswordPage />} />
-              <Route path="/historial" element={<OrderHistoryPage />} />
-              <Route path="/aliados" element={<PartnerPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </CartProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <AuthDialog />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/catalogo" element={<CatalogPage />} />
+            <Route path="/producto/:id" element={<ProductPage />} />
+            <Route path="/perfil" element={<ProfilePage />} />
+            <Route path="/cambiar-contrasena" element={<ChangePasswordPage />} />
+            <Route path="/historial" element={<OrderHistoryPage />} />
+            <Route path="/aliados" element={<PartnerPage />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>

@@ -9,7 +9,7 @@ const faqs = [
   {
     question: "¿Cómo funciona el proceso de compra?",
     answer:
-      "Selecciona el producto que deseas, agrégalo al carrito y completa el pago. Recibirás tu código o recarga al instante en tu correo electrónico o directamente en tu cuenta.",
+      "Selecciona el producto que deseas y completa el pago. Recibirás tu código o recarga al instante en tu correo electrónico o directamente en tu cuenta.",
   },
   {
     question: "¿Cuánto tiempo tarda en llegar mi pedido?",
