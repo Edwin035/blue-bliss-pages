@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import partnerImg from '@/assets/partner-character.png';
 
 const PartnerBanner = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-8">
       <div className="container mx-auto px-4">
@@ -30,11 +33,14 @@ const PartnerBanner = () => {
             {/* Text content */}
             <div className="flex-1 flex flex-col items-center md:items-start justify-center p-6 md:p-10 text-center md:text-left">
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-foreground italic mb-4 leading-tight">
-                Vuélvete una <span className="gradient-text">Leyenda</span>,
+                Crece con nosotros,
                 <br />
-                sé nuestro partner
+                <span className="gradient-text">sé nuestro aliado</span>
               </h3>
-              <button className="btn-gaming px-8 py-3 rounded-full text-primary-foreground font-semibold text-sm uppercase tracking-wider">
+              <button
+                onClick={() => navigate('/aliados')}
+                className="btn-gaming px-8 py-3 rounded-full text-primary-foreground font-semibold text-sm uppercase tracking-wider"
+              >
                 Comenzar ahora
               </button>
             </div>
