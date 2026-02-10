@@ -60,7 +60,7 @@ const PartnerPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-primary/20 via-secondary/15 to-accent/20">
       <Navbar />
 
       {/* Header */}
