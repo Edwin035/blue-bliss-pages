@@ -36,7 +36,7 @@ const ProfilePage = () => {
       <Navbar />
       
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl sm:text-3xl font-display font-bold mb-6">Mi Cuenta</h1>
+        <h1 className="text-2xl sm:text-3xl font-display font-bold mb-6">Mi <span className="gradient-text">Cuenta</span></h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <ProfileSidebar activePage="profile" />
@@ -45,7 +45,7 @@ const ProfilePage = () => {
             <div className="bg-card border border-border rounded-xl p-4 sm:p-6">
               <h2 className="text-lg sm:text-xl font-semibold mb-6 flex items-center gap-2">
                 <User className="h-5 w-5 text-primary" />
-                Información Personal
+                Información <span className="gradient-text">Personal</span>
               </h2>
               
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
