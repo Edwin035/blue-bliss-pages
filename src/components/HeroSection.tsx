@@ -27,8 +27,8 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 py-16 md:py-24 flex flex-col justify-center min-h-[500px] md:min-h-[600px]">
-        <div className="max-w-xl">
+      <div className="relative container mx-auto px-4 py-16 md:py-24 flex flex-col justify-center items-center md:items-start min-h-[500px] md:min-h-[600px]">
+        <div className="max-w-xl text-center md:text-left">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full mb-6 animate-glow">
             <Zap className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">Oferta Especial</span>
@@ -44,7 +44,7 @@ const HeroSection = () => {
             Hasta <span className="text-primary font-bold text-3xl">15% OFF</span> en todos tus juegos favoritos
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <button onClick={handleBuyClick} className="btn-gaming flex items-center gap-2">
               Comprar Ahora
               <ChevronRight className="h-4 w-4" />
