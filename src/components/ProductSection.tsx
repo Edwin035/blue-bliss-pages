@@ -5,18 +5,21 @@ import { ChevronRight } from 'lucide-react';
 
 interface ProductSectionProps {
   title: string;
+  titleAccent?: string;
   subtitle?: string;
   products: Product[];
 }
 
-const ProductSection = ({ title, subtitle, products }: ProductSectionProps) => {
+const ProductSection = ({ title, titleAccent, subtitle, products }: ProductSectionProps) => {
   return (
     <section className="py-12 md:py-16">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="section-title gradient-text">{title}</h2>
+            <h2 className="section-title text-foreground">
+              {title} {titleAccent && <span className="gradient-text">{titleAccent}</span>}
+            </h2>
             {subtitle && (
               <p className="text-muted-foreground mt-1">{subtitle}</p>
             )}

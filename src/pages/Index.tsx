@@ -18,7 +18,8 @@ const Index = () => {
       
       {/* PlayStation Section */}
       <ProductSection 
-        title="PlayStation"
+        title="Play"
+        titleAccent="Station"
         subtitle="Disfruta al máximo tus juegos favoritos"
         products={sampleProducts.playstation}
       />
@@ -37,7 +38,8 @@ const Index = () => {
 
       {/* Mobile Games Section */}
       <ProductSection 
-        title="Free Fire"
+        title="Free"
+        titleAccent="Fire"
         subtitle="+10% de bono en diamantes"
         products={sampleProducts.mobile}
       />
