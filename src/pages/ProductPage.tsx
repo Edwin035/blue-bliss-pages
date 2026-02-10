@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { ChevronLeft } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,6 +8,15 @@ import { getProductById, getRelatedProducts } from '@/data/products';
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
+  const { isAuthenticated, setIsAuthOpen } = useAuth();
+
+  const handleBuy = () => {
+    if (!isAuthenticated) {
+      setIsAuthOpen(true);
+      return;
+    }
+    // TODO: lógica de compra
+  };
   const product = getProductById(Number(id));
   const relatedProducts = product ? getRelatedProducts(product, 4) : [];
 
@@ -119,6 +129,7 @@ const ProductPage = () => {
 
               {/* Buy Button */}
               <button 
+                onClick={handleBuy}
                 className="w-full btn-gaming text-center py-3 text-lg mb-6"
               >
                 COMPRAR
