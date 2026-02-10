@@ -1,7 +1,6 @@
-import { ShoppingCart, Search, Menu, X } from "lucide-react";
+import { Search, Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "@/contexts/CartContext";
 import SearchDialog from "@/components/SearchDialog";
 import UserMenu from "@/components/UserMenu";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -9,7 +8,6 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { totalItems, setIsOpen } = useCart();
 
   const navItems = [
     { name: "PlayStation", href: "/catalogo?platform=PlayStation" },
@@ -59,19 +57,6 @@ const Navbar = () => {
               </button>
 
               <UserMenu />
-
-              <button
-                onClick={() => setIsOpen(true)}
-                className="relative p-2 text-white hover:text-primary transition-colors"
-                aria-label="Carrito"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 min-w-4 px-1 bg-primary text-primary-foreground text-[10px] leading-4 rounded-full flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </button>
 
               <button
                 className="md:hidden p-2 text-white"
