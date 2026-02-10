@@ -50,8 +50,8 @@ const CatalogPage = () => {
       {/* Header */}
       <div className="bg-gradient-to-b from-primary/10 to-background py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl md:text-4xl font-display font-bold gradient-text mb-2">
-            Catálogo
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">
+            Catá<span className="gradient-text">logo</span>
           </h1>
           <p className="text-muted-foreground">
             Explora nuestra colección de {allProducts.length} productos digitales
