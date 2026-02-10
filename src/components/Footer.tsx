@@ -7,12 +7,18 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Gamepad2 className="h-8 w-8 text-primary" />
-              <span className="text-xl font-display font-bold gradient-text">
-                TOPLEVEL
-              </span>
-            </div>
+             <img
+                src="https://imagedelivery.net/mdYNjHMfu0qYk6YLCukv2Q/07bccdde-7b1c-4dc0-e236-3a9f7b055f00/public"
+                alt="TopLevel"
+                loading="eager"
+                className="
+                  h-10 w-auto
+                  md:h-11 lg:h-12
+                  max-w-[160px] md:max-w-[190px]
+                  object-contain
+                  select-none
+                "
+              />
             <p className="text-sm text-muted-foreground">
               Somos tu mejor aliado gamer. Juega, conecta y evoluciona al máximo nivel.
             </p>

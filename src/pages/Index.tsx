@@ -28,24 +28,19 @@ const Index = () => {
             title="EXPLORA NUEVOS MUNDOS"
             subtitle="Descubre las mejores ofertas en juegos de mundo abierto"
             discount="40% OFF"
-            image={characterImg}
+            image={'https://www.parents.com/thmb/tSML3POrp_0tDY4mO5y-HnVUqaQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Video20Games-fa6d2b8bac9c47d1b2144928e4713f38.jpg'}
           />
         </div>
       </section>
 
       {/* Mobile Games Section */}
       <ProductSection 
-        title="Free Fire & Mobile"
+        title="Free Fire"
         subtitle="+10% de bono en diamantes"
         products={sampleProducts.mobile}
       />
 
-      {/* Xbox Section */}
-      <ProductSection 
-        title="Xbox Game Pass"
-        subtitle="Códigos y juegos originales"
-        products={sampleProducts.xbox}
-      />
+   
 
       {/* Promo Banner 2 */}
       <section className="py-8">
@@ -54,41 +49,15 @@ const Index = () => {
             title="GAME PASS ULTIMATE"
             subtitle="Acceso ilimitado a cientos de juegos"
             discount="6% OFF"
-            image={xboxImg}
+            image={'https://t4.ftcdn.net/jpg/03/64/29/09/360_F_364290929_al9CUzJQooK5fJ7dekJ2X1U88gvamAmC.jpg'}
             reversed
           />
         </div>
       </section>
 
       {/* Steam Section */}
-      <ProductSection 
-        title="Juegos de Steam"
-        subtitle="Los mejores títulos de PC"
-        products={sampleProducts.steam}
-      />
-
-      {/* Promotions Section */}
-      <section className="py-16 bg-gradient-to-b from-card/50 to-background">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="section-title gradient-text mb-4">PROMOCIONES MÁS RECIENTES</h2>
-          <p className="text-muted-foreground mb-12">Ofertas exclusivas y promociones limitadas</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: 'Game Pass', discount: '15%', desc: 'En suscripciones anuales' },
-              { title: 'Steam Wallet', discount: '10%', desc: 'En todas las denominaciones' },
-              { title: 'PlayStation Plus', discount: '20%', desc: 'Por tiempo limitado' },
-            ].map((promo, index) => (
-              <div key={index} className="card-gaming p-6 text-center">
-                <span className="text-4xl font-display font-bold gradient-text">{promo.discount}</span>
-                <h3 className="text-lg font-bold text-foreground mt-2">{promo.title}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{promo.desc}</p>
-                <button className="btn-gaming mt-4">Aprovechar</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  
+  
 
       <Footer />
     </div>

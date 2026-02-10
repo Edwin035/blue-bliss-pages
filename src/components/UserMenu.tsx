@@ -10,14 +10,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
-const UserMenu = () => {
+const  UserMenu = () => {
   const { isAuthenticated, setIsAuthOpen, logout } = useAuth();
 
   if (!isAuthenticated) {
     return (
       <button 
         onClick={() => setIsAuthOpen(true)}
-        className="p-2 text-muted-foreground hover:text-primary transition-colors"
+        className="p-2 text-white hover:text-primary transition-colors"
       >
         <User className="h-5 w-5" />
       </button>
@@ -31,7 +31,7 @@ const UserMenu = () => {
           <div className="h-7 w-7 rounded-full bg-primary/20 flex items-center justify-center">
             <User className="h-4 w-4 text-primary" />
           </div>
-          <ChevronDown className="h-3.5 w-3.5 text-muted-foreground hidden sm:block" />
+          <ChevronDown className="h-3.5 w-3.5 text-white hidden sm:block" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
