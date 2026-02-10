@@ -14,6 +14,7 @@ import CatalogPage from "./pages/CatalogPage";
 import ProfilePage from "./pages/ProfilePage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
+import PartnerPage from "./pages/PartnerPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/perfil" element={<ProfilePage />} />
               <Route path="/cambiar-contrasena" element={<ChangePasswordPage />} />
               <Route path="/historial" element={<OrderHistoryPage />} />
+              <Route path="/aliados" element={<PartnerPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
