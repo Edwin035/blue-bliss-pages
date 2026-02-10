@@ -1,9 +1,10 @@
-import { ShoppingCart, Search, Menu } from "lucide-react";
+import { ShoppingCart, Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import SearchDialog from "@/components/SearchDialog";
 import UserMenu from "@/components/UserMenu";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,8 +14,8 @@ const Navbar = () => {
   const navItems = [
     { name: "PlayStation", href: "/catalogo?platform=PlayStation" },
     { name: "Free Fire", href: "/catalogo?platform=Mobile" },
-    { name: "Aliados", href: "/aliados" },
     { name: "Ofertas", href: "/catalogo" },
+    { name: "Aliados", href: "/aliados" },
   ];
 
   return (
@@ -30,13 +31,7 @@ const Navbar = () => {
                 src="https://imagedelivery.net/mdYNjHMfu0qYk6YLCukv2Q/07bccdde-7b1c-4dc0-e236-3a9f7b055f00/public"
                 alt="TopLevel"
                 loading="eager"
-                className="
-                  h-10 w-auto
-                  md:h-11 lg:h-12
-                  max-w-[160px] md:max-w-[190px]
-                  object-contain
-                  select-none
-                "
+                className="h-10 w-auto md:h-11 lg:h-12 max-w-[160px] md:max-w-[190px] object-contain select-none"
               />
             </Link>
 
@@ -80,32 +75,42 @@ const Navbar = () => {
 
               <button
                 className="md:hidden p-2 text-white"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => setIsMenuOpen(true)}
                 aria-label="Menú"
-                aria-expanded={isMenuOpen}
               >
                 <Menu className="h-5 w-5" />
               </button>
             </div>
           </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-border">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="block py-2 text-sm font-medium text-white hover:text-primary transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </nav>
+
+      {/* Mobile Menu Modal */}
+      <Dialog open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+        <DialogContent className="sm:max-w-sm bg-card border-border p-0">
+          <div className="flex items-center justify-between p-4 border-b border-border">
+            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+              <img
+                src="https://imagedelivery.net/mdYNjHMfu0qYk6YLCukv2Q/07bccdde-7b1c-4dc0-e236-3a9f7b055f00/public"
+                alt="TopLevel"
+                className="h-8 w-auto object-contain"
+              />
+            </Link>
+          </div>
+          <nav className="flex flex-col p-4 gap-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="py-3 px-4 rounded-lg text-base font-medium text-foreground hover:bg-muted hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
