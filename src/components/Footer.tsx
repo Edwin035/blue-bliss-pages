@@ -1,4 +1,5 @@
-import { Gamepad2, Monitor, Gift, CreditCard, Tv, MessageCircle, HelpCircle, Clock, Facebook, Instagram } from 'lucide-react';
+import { Gamepad2, Monitor, Gift, CreditCard, Tv, MessageCircle, HelpCircle, Clock, Facebook, Instagram, Handshake } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -70,6 +71,12 @@ const Footer = () => {
                 <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Contacto
                 </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Handshake className="h-4 w-4 text-neon-cyan" />
+                <Link to="/aliados" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Aliados
+                </Link>
               </li>
               <li className="flex items-center gap-2">
                 <HelpCircle className="h-4 w-4 text-yellow-500" />

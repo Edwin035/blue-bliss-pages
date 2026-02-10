@@ -13,6 +13,7 @@ const Navbar = () => {
   const navItems = [
     { name: "PlayStation", href: "/catalogo?platform=PlayStation" },
     { name: "Free Fire", href: "/catalogo?platform=Mobile" },
+    { name: "Aliados", href: "/aliados" },
     { name: "Ofertas", href: "/catalogo" },
   ];
 
