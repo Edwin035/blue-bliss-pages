@@ -1,18 +1,24 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Lock, CreditCard } from 'lucide-react';
+import { ChevronLeft, Lock, CreditCard, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getProductById } from '@/data/products';
 import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/hooks/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Progress } from '@/components/ui/progress';
 
 const CheckoutPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [selectedMethod, setSelectedMethod] = useState<string>('mercadopago');
-
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [progress, setProgress] = useState(0);
   const product = getProductById(Number(id));
 
   if (!isAuthenticated) {
@@ -40,10 +46,21 @@ const CheckoutPage = () => {
   const total = subtotal + commission;
 
   const handleConfirmPayment = () => {
-    toast({
-      title: "Orden creada",
-      description: "Serás redirigido a Mercado Pago para completar el pago.",
-    });
+    setIsProcessing(true);
+    setProgress(0);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            navigate(`/factura/${id}`);
+          }, 400);
+          return 100;
+        }
+        return prev + Math.random() * 15 + 5;
+      });
+    }, 300);
   };
 
   return (
@@ -141,6 +158,32 @@ const CheckoutPage = () => {
           </div>
         </div>
       </main>
+
+      {/* Loading Modal */}
+      <Dialog open={isProcessing}>
+        <DialogContent className="sm:max-w-md text-center" onPointerDownOutside={(e) => e.preventDefault()}>
+          <DialogTitle className="sr-only">Procesando pago</DialogTitle>
+          <div className="flex flex-col items-center gap-5 py-4">
+            <div className="relative">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                <Loader2 className="h-8 w-8 text-primary animate-spin" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-lg font-bold text-foreground">Procesando tu pago</h3>
+              <p className="text-sm text-muted-foreground">
+                Estamos confirmando tu transacción con Mercado Pago...
+              </p>
+            </div>
+            <div className="w-full">
+              <Progress value={Math.min(progress, 100)} className="h-2" />
+              <p className="text-xs text-muted-foreground mt-2">
+                {Math.min(Math.round(progress), 100)}% completado
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>

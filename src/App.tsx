@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import ProductPage from "./pages/ProductPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import CatalogPage from "./pages/CatalogPage";
+import InvoicePage from "./pages/InvoicePage";
 import ProfilePage from "./pages/ProfilePage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/catalogo" element={<CatalogPage />} />
             <Route path="/producto/:id" element={<ProductPage />} />
             <Route path="/checkout/:id" element={<CheckoutPage />} />
+            <Route path="/factura/:id" element={<InvoicePage />} />
             <Route path="/perfil" element={<ProfilePage />} />
             <Route path="/cambiar-contrasena" element={<ChangePasswordPage />} />
             <Route path="/historial" element={<OrderHistoryPage />} />
